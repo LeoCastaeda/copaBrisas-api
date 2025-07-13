@@ -23,14 +23,33 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const customerController = __importStar(require("../controllers/customer.controller"));
-const validate_1 = require("../middlewares/validate");
-const customer_schema_1 = require("../schemas/customer.schema");
-const router = (0, express_1.Router)();
-router.get("/", customerController.getCustomers);
-router.get("/:id", customerController.getCustomer);
-router.post("/", (0, validate_1.validate)(customer_schema_1.customerSchema), customerController.createCustomer);
-router.put("/:id", (0, validate_1.validate)(customer_schema_1.customerSchema), customerController.updateCustomer);
-router.delete("/:id", customerController.deleteCustomer);
-exports.default = router;
+exports.deleteCity = exports.updateCity = exports.createCity = exports.getCityById = exports.getAllCities = void 0;
+const cityService = __importStar(require("../services/city.service"));
+const getAllCities = async (req, res) => {
+    const cities = await cityService.getAllCities();
+    res.json(cities);
+};
+exports.getAllCities = getAllCities;
+const getCityById = async (req, res) => {
+    const id = Number(req.params.id);
+    const city = await cityService.getCityById(id);
+    res.json(city);
+};
+exports.getCityById = getCityById;
+const createCity = async (req, res) => {
+    const newCity = await cityService.createCity(req.body);
+    res.status(201).json(newCity);
+};
+exports.createCity = createCity;
+const updateCity = async (req, res) => {
+    const id = Number(req.params.id);
+    const updatedCity = await cityService.updateCity(id, req.body);
+    res.json(updatedCity);
+};
+exports.updateCity = updateCity;
+const deleteCity = async (req, res) => {
+    const id = Number(req.params.id);
+    await cityService.deleteCity(id);
+    res.status(204).send();
+};
+exports.deleteCity = deleteCity;

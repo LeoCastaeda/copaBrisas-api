@@ -23,64 +23,61 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCustomer = exports.updateCustomer = exports.createCustomer = exports.getCustomer = exports.getCustomers = void 0;
-const customerService = __importStar(require("../services/customer.service"));
-const getCustomers = async (req, res, next) => {
+exports.deleteBooking = exports.updateBooking = exports.createBooking = exports.getBooking = exports.getBookings = void 0;
+const bookingService = __importStar(require("../services/booking.service"));
+const getBookings = async (req, res, next) => {
     try {
-        const customers = await customerService.getAllCustomers();
-        res.json(customers);
+        const bookings = await bookingService.getAllBookings();
+        res.json(bookings);
     }
     catch (error) {
         next(error);
     }
 };
-exports.getCustomers = getCustomers;
-const getCustomer = async (req, res, next) => {
+exports.getBookings = getBookings;
+const getBooking = async (req, res, next) => {
     try {
         const id = Number(req.params.id);
-        const customer = await customerService.getCustomerById(id);
-        if (!customer) {
-            res.status(404).json({ message: "Customer not found" });
-            return;
+        const booking = await bookingService.getBookingById(id);
+        if (!booking) {
+            return res.status(404).json({ message: "Booking not found" });
         }
-        res.json(customer);
+        res.json(booking);
     }
     catch (error) {
         next(error);
     }
 };
-exports.getCustomer = getCustomer;
-const createCustomer = async (req, res, next) => {
+exports.getBooking = getBooking;
+const createBooking = async (req, res, next) => {
     try {
-        const { name, phone, email } = req.body;
-        const newCustomer = await customerService.createCustomer({ name, phone, email });
-        res.status(201).json(newCustomer);
+        const booking = await bookingService.createBooking(req.body);
+        res.status(201).json(booking);
     }
     catch (error) {
         next(error);
     }
 };
-exports.createCustomer = createCustomer;
-const updateCustomer = async (req, res, next) => {
+exports.createBooking = createBooking;
+const updateBooking = async (req, res, next) => {
     try {
         const id = Number(req.params.id);
-        const data = req.body;
-        const updatedCustomer = await customerService.updateCustomer(id, data);
-        res.json(updatedCustomer);
+        const booking = await bookingService.updateBooking(id, req.body);
+        res.json(booking);
     }
     catch (error) {
-        res.status(404).json({ message: "Customer not found" });
+        next(error);
     }
 };
-exports.updateCustomer = updateCustomer;
-const deleteCustomer = async (req, res, next) => {
+exports.updateBooking = updateBooking;
+const deleteBooking = async (req, res, next) => {
     try {
         const id = Number(req.params.id);
-        await customerService.deleteCustomer(id);
+        await bookingService.deleteBooking(id);
         res.status(204).send();
     }
     catch (error) {
-        res.status(404).json({ message: "Customer not found" });
+        next(error);
     }
 };
-exports.deleteCustomer = deleteCustomer;
+exports.deleteBooking = deleteBooking;

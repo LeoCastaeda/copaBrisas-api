@@ -1,0 +1,145 @@
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### Health Check
+GET {{baseUrl}}/
+
+# ────────────────────────
+# CLIENTES
+# ────────────────────────
+
+### Obtener todos los clientes
+GET {{baseUrl}}/customers
+Content-Type: {{contentType}}
+
+### Obtener un cliente por ID
+GET {{baseUrl}}/customers/2
+Content-Type: {{contentType}}
+
+### Crear un nuevo cliente
+POST {{baseUrl}}/customers
+Content-Type: {{contentType}}
+
+{
+  "name": "Carlos Mendoza",
+  "phone": "123456789",
+  "email": "carlos@example.com"
+}
+
+### Actualizar un cliente
+PUT {{baseUrl}}/customers/2
+Content-Type: {{contentType}}
+
+{
+  "name": "Carlos M. Mendoza",
+  "phone": "987654321",
+  "email": "carlosm@example.com"
+}
+
+### Eliminar un cliente
+DELETE {{baseUrl}}/customers/1
+Content-Type: {{contentType}}
+
+### Buscar clientes por nombre
+GET {{baseUrl}}/customers?name=Carlos
+Content-Type: {{contentType}}
+
+
+# ────────────────────────
+# VEHICLES
+# ────────────────────────
+
+### Obtener todos los vehículos
+GET {{baseUrl}}/vehicles
+Content-Type: {{contentType}}
+
+### Obtener un vehículo por ID
+GET {{baseUrl}}/vehicles/1
+Content-Type: {{contentType}}
+
+### Crear un nuevo vehículo
+POST {{baseUrl}}/vehicles
+Content-Type: {{contentType}}
+
+{
+  "plate": "ABC1234",
+  "brand": "Toyota",
+  "model": "Corolla",
+  "customerId": 2
+}
+
+### Actualizar un vehículo por ID
+PUT {{baseUrl}}/vehicles/1
+Content-Type: {{contentType}}
+
+{
+  "plate": "XYZ9876",
+  "brand": "Honda",
+  "model": "Civic",
+  "customerId": 2
+}
+### Get all cities
+GET http://localhost:3000/cities
+
+### Get one city by ID
+GET http://localhost:3000/cities/1
+
+### Create a city
+POST http://localhost:3000/cities
+Content-Type: application/json
+
+{
+  "name": "Barcelona"
+}
+
+### Update a city
+PUT http://localhost:3000/cities/1
+Content-Type: application/json
+
+{
+  "name": "Madrid"
+}
+
+### Delete a city
+DELETE http://localhost:3000/cities/1
+
+
+### Eliminar un vehículo por ID
+DELETE {{baseUrl}}/vehicles/1
+Content-Type: {{contentType}}
+
+### Booking ###
+
+### Obtener todos los bookings
+GET {{baseUrl}}/bookings
+Content-Type: {{contentType}}
+
+### Obtener un booking por ID
+GET {{baseUrl}}/bookings/2
+Content-Type: {{contentType}}
+
+### Crear un nuevo booking
+POST {{baseUrl}}/bookings
+Content-Type: {{contentType}}
+
+{
+  "date": "2025-07-15T10:00:00.000Z",
+  "customerId": 2,
+  "cityId": 1,
+  "serviceId": 1,
+  "vehicleId": 1,
+  "status": "confirmed"
+}
+
+### Actualizar un booking
+PUT {{baseUrl}}/bookings/1
+Content-Type: {{contentType}}
+
+{
+  "status": "cancelled"
+}
+
+### Eliminar un booking
+DELETE {{baseUrl}}/bookings/1
+
+

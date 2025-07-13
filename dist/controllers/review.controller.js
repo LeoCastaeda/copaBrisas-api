@@ -23,14 +23,27 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const customerController = __importStar(require("../controllers/customer.controller"));
-const validate_1 = require("../middlewares/validate");
-const customer_schema_1 = require("../schemas/customer.schema");
-const router = (0, express_1.Router)();
-router.get("/", customerController.getCustomers);
-router.get("/:id", customerController.getCustomer);
-router.post("/", (0, validate_1.validate)(customer_schema_1.customerSchema), customerController.createCustomer);
-router.put("/:id", (0, validate_1.validate)(customer_schema_1.customerSchema), customerController.updateCustomer);
-router.delete("/:id", customerController.deleteCustomer);
-exports.default = router;
+exports.deleteReview = exports.createReview = exports.getReviewById = exports.getAllReviews = void 0;
+const reviewService = __importStar(require("../services/review.service"));
+const getAllReviews = async (req, res) => {
+    const reviews = await reviewService.getAllReviews();
+    res.json(reviews);
+};
+exports.getAllReviews = getAllReviews;
+const getReviewById = async (req, res) => {
+    const id = Number(req.params.id);
+    const review = await reviewService.getReviewById(id);
+    res.json(review);
+};
+exports.getReviewById = getReviewById;
+const createReview = async (req, res) => {
+    const newReview = await reviewService.createReview(req.body);
+    res.status(201).json(newReview);
+};
+exports.createReview = createReview;
+const deleteReview = async (req, res) => {
+    const id = Number(req.params.id);
+    await reviewService.deleteReview(id);
+    res.status(204).send();
+};
+exports.deleteReview = deleteReview;
