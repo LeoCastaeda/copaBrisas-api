@@ -1,0 +1,76 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model booking {
+    id         Int      @id @default(autoincrement())
+    date       DateTime
+    customerId Int
+    cityId     Int
+    serviceId  Int
+    vehicleId  Int
+    status     String
+
+    customer customer @relation(fields: [customerId], references: [id], name: "CustomerBookings")
+    city     city     @relation(fields: [cityId], references: [id])
+    service  service  @relation(fields: [serviceId], references: [id])
+    vehicle  vehicle  @relation(fields: [vehicleId], references: [id])
+
+    @@index([cityId], map: "Booking_cityId_fkey")
+    @@index([customerId], map: "Booking_customerId_fkey")
+    @@index([serviceId], map: "Booking_serviceId_fkey")
+    @@index([vehicleId], map: "Booking_vehicleId_fkey")
+}
+
+model city {
+    id       Int       @id @default(autoincrement())
+    name     String
+    bookings booking[]
+}
+
+model customer {
+    id        Int       @id @default(autoincrement())
+    name      String
+    phone     String
+    email     String
+    createdAt DateTime  @default(now())
+    vehicles  vehicle[]
+    reviews   review[]
+    bookings  booking[] @relation("CustomerBookings")
+}
+
+model review {
+    id         Int      @id @default(autoincrement())
+    content    String
+    rating     Int
+    customerId Int
+    createdAt  DateTime @default(now())
+
+    customer customer @relation(fields: [customerId], references: [id])
+
+    @@index([customerId], map: "Review_customerId_fkey")
+}
+
+model service {
+    id       Int       @id @default(autoincrement())
+    name     String
+    price    Float
+    duration Int
+    bookings booking[]
+}
+
+model vehicle {
+    id         Int    @id @default(autoincrement())
+    plate      String @unique(map: "Vehicle_plate_key")
+    brand      String
+    model      String
+    customerId Int
+
+    customer customer  @relation(fields: [customerId], references: [id])
+    bookings booking[]
+}

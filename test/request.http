@@ -13,7 +13,7 @@ GET {{baseUrl}}/customers
 Content-Type: {{contentType}}
 
 ### Obtener un cliente por ID
-GET {{baseUrl}}/customers/2
+GET {{baseUrl}}/customers/1
 Content-Type: {{contentType}}
 
 ### Crear un nuevo cliente
@@ -65,7 +65,7 @@ Content-Type: {{contentType}}
   "plate": "ABC1234",
   "brand": "Toyota",
   "model": "Corolla",
-  "customerId": 2
+  "customerId": 1
 }
 
 ### Actualizar un vehículo por ID
@@ -76,55 +76,137 @@ Content-Type: {{contentType}}
   "plate": "XYZ9876",
   "brand": "Honda",
   "model": "Civic",
-  "customerId": 2
+  "customerId": 1
 }
-### Get all cities
-GET http://localhost:3000/cities
+# ────────────────────────
+# CITIES
+# ────────────────────────
 
-### Get one city by ID
-GET http://localhost:3000/cities/1
+### Obtener todas las ciudades
+GET {{baseUrl}}/api/cities
+Content-Type: {{contentType}}
 
-### Create a city
-POST http://localhost:3000/cities
-Content-Type: application/json
+### Obtener una ciudad por ID
+GET {{baseUrl}}/api/cities/1
+Content-Type: {{contentType}}
+
+### Crear una ciudad
+POST {{baseUrl}}/api/cities
+Content-Type: {{contentType}}
 
 {
-  "name": "Barcelona"
+  "name": "Baaarcelona"
 }
 
-### Update a city
-PUT http://localhost:3000/cities/1
-Content-Type: application/json
+### Actualizar una ciudad
+PUT {{baseUrl}}/api/cities/1
+Content-Type: {{contentType}}
 
 {
   "name": "Madrid"
 }
 
-### Delete a city
-DELETE http://localhost:3000/cities/1
+### Eliminar una ciudad
+DELETE {{baseUrl}}/api/cities/1
+Content-Type: {{contentType}}
 
 
 ### Eliminar un vehículo por ID
 DELETE {{baseUrl}}/vehicles/1
 Content-Type: {{contentType}}
 
+
+
+# ────────────────────────
+# SERVICES
+# ────────────────────────
+
+### Obtener todos los servicios
+GET {{baseUrl}}/api/services
+Content-Type: {{contentType}}
+
+### Obtener un servicio por ID
+GET {{baseUrl}}/api/services/1
+Content-Type: {{contentType}}
+
+### Crear un servicio
+POST {{baseUrl}}/api/services
+Content-Type: {{contentType}}
+
+{
+  "name": "Cambio de parabrisas",
+  "price": 120.50,
+  "duration": 60
+}
+
+### Actualizar un servicio
+PUT {{baseUrl}}/api/services/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Reparación de parabrisas",
+  "price": 90.00, 
+  "duration": 45
+}
+
+### Eliminar un servicio
+DELETE {{baseUrl}}/api/services/1
+Content-Type: {{contentType}}
+
+
+# ────────────────────────
+# REVIEWS
+# ────────────────────────
+
+### Obtener todas las reviews
+GET {{baseUrl}}/api/reviews
+Content-Type: {{contentType}}
+
+### Obtener una review por ID
+GET {{baseUrl}}/api/reviews/1
+Content-Type: {{contentType}}
+
+### Crear una review
+POST {{baseUrl}}/api/reviews
+Content-Type: {{contentType}}
+
+{
+  "rating": 5,
+  "comment": "Excelente servicio",
+  "customerId": 2,
+  "bookingId": 1
+}
+
+### Actualizar una review
+PUT {{baseUrl}}/api/reviews/1
+Content-Type: {{contentType}}
+
+{
+  "rating": 4,
+  "comment": "Muy buen servicio"
+}
+
+### Eliminar una review
+DELETE {{baseUrl}}/api/reviews/1
+Content-Type: {{contentType}}
+
 ### Booking ###
 
 ### Obtener todos los bookings
-GET {{baseUrl}}/bookings
+GET {{baseUrl}}/api/bookings
 Content-Type: {{contentType}}
 
 ### Obtener un booking por ID
-GET {{baseUrl}}/bookings/2
+GET {{baseUrl}}/api/bookings/2
 Content-Type: {{contentType}}
 
 ### Crear un nuevo booking
-POST {{baseUrl}}/bookings
+POST {{baseUrl}}/api/bookings
 Content-Type: {{contentType}}
 
 {
   "date": "2025-07-15T10:00:00.000Z",
-  "customerId": 2,
+  "customerId": 1,
   "cityId": 1,
   "serviceId": 1,
   "vehicleId": 1,
@@ -132,7 +214,7 @@ Content-Type: {{contentType}}
 }
 
 ### Actualizar un booking
-PUT {{baseUrl}}/bookings/1
+PUT {{baseUrl}}/api/bookings/1
 Content-Type: {{contentType}}
 
 {
@@ -140,6 +222,6 @@ Content-Type: {{contentType}}
 }
 
 ### Eliminar un booking
-DELETE {{baseUrl}}/bookings/1
+DELETE {{baseUrl}}/api/bookings/1
 
 

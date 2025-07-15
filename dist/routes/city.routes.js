@@ -25,10 +25,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controller = __importStar(require("../controllers/city.controller"));
+const validate_1 = require("../middlewares/validate");
+const city_schema_1 = require("../schemas/city.schema");
 const router = (0, express_1.Router)();
 router.get("/", controller.getAllCities);
 router.get("/:id", controller.getCityById);
-router.post("/", controller.createCity);
-router.put("/:id", controller.updateCity);
+router.post("/", (0, validate_1.validate)(city_schema_1.citySchema), controller.createCity);
+router.put("/:id", (0, validate_1.validate)(city_schema_1.citySchema), controller.updateCity);
 router.delete("/:id", controller.deleteCity);
 exports.default = router;
