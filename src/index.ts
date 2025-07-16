@@ -7,6 +7,7 @@ import bookingRoutes from "./routes/booking.routes";
 import cityRoutes from "./routes/city.routes";
 import serviceRoutes from "./routes/service.routes";
 import reviewRoutes from "./routes/review.routes";
+import { errorHandler } from "./middlewares/errorHandler";
 
 dotenv.config();
 
@@ -25,6 +26,9 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/cities", cityRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use(errorHandler);
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

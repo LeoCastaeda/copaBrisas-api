@@ -12,6 +12,7 @@ const booking_routes_1 = __importDefault(require("./routes/booking.routes"));
 const city_routes_1 = __importDefault(require("./routes/city.routes"));
 const service_routes_1 = __importDefault(require("./routes/service.routes"));
 const review_routes_1 = __importDefault(require("./routes/review.routes"));
+const errorHandler_1 = require("./middlewares/errorHandler");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -25,6 +26,7 @@ app.use("/api/bookings", booking_routes_1.default);
 app.use("/api/cities", city_routes_1.default);
 app.use("/api/services", service_routes_1.default);
 app.use("/api/reviews", review_routes_1.default);
+app.use(errorHandler_1.errorHandler);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
