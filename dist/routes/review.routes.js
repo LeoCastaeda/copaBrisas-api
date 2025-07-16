@@ -25,9 +25,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controller = __importStar(require("../controllers/review.controller"));
+const validate_1 = require("../middlewares/validate");
+const review_schema_1 = require("../schemas/review.schema");
 const router = (0, express_1.Router)();
 router.get("/", controller.getAllReviews);
 router.get("/:id", controller.getReviewById);
-router.post("/", controller.createReview);
+router.post("/", (0, validate_1.validate)(review_schema_1.reviewSchema), controller.createReview);
+router.put("/:id", (0, validate_1.validate)(review_schema_1.reviewUpdateSchema), controller.updateReview);
 router.delete("/:id", controller.deleteReview);
 exports.default = router;

@@ -135,8 +135,8 @@ Content-Type: {{contentType}}
 
 {
   "name": "Cambio de parabrisas",
-  "price": 120.50,
-  "duration": 60
+  "price": 241.0,
+  "duration": 120
 }
 
 ### Actualizar un servicio
@@ -170,11 +170,10 @@ Content-Type: {{contentType}}
 POST {{baseUrl}}/api/reviews
 Content-Type: {{contentType}}
 
-{
+ {
   "rating": 5,
-  "comment": "Excelente servicio",
-  "customerId": 2,
-  "bookingId": 1
+  "content": "Excelente servicio",
+  "customerId": 1
 }
 
 ### Actualizar una review
@@ -183,7 +182,7 @@ Content-Type: {{contentType}}
 
 {
   "rating": 4,
-  "comment": "Muy buen servicio"
+  "content": "Muy buen servicio"
 }
 
 ### Eliminar una review

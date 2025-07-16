@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteReview = exports.createReview = exports.getReviewById = exports.getAllReviews = void 0;
+exports.updateReview = exports.deleteReview = exports.createReview = exports.getReviewById = exports.getAllReviews = void 0;
 const reviewService = __importStar(require("../services/review.service"));
 const getAllReviews = async (req, res) => {
     const reviews = await reviewService.getAllReviews();
@@ -47,3 +47,9 @@ const deleteReview = async (req, res) => {
     res.status(204).send();
 };
 exports.deleteReview = deleteReview;
+const updateReview = async (req, res) => {
+    const id = Number(req.params.id);
+    const updatedReview = await reviewService.updateReview(id, req.body);
+    res.json(updatedReview);
+};
+exports.updateReview = updateReview;

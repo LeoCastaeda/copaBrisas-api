@@ -22,3 +22,8 @@ export const deleteReview = async (req: Request, res: Response) => {
   await reviewService.deleteReview(id);
   res.status(204).send();
 };
+export const updateReview = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const updatedReview = await reviewService.updateReview(id, req.body);
+  res.json(updatedReview);
+};
