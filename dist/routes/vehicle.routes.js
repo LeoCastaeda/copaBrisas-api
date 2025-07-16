@@ -31,6 +31,6 @@ const router = (0, express_1.Router)();
 router.get("/", vehicleController.getVehicles);
 router.get("/:id", vehicleController.getVehicle);
 router.post("/", (0, validate_1.validate)(vehicle_schema_1.vehicleSchema), vehicleController.createVehicle);
-router.put("/:id", vehicleController.updateVehicle);
+router.put("/:id", (0, validate_1.validate)(vehicle_schema_1.vehicleSchema), vehicleController.updateVehicle);
 router.delete("/:id", vehicleController.deleteVehicle);
 exports.default = router;
