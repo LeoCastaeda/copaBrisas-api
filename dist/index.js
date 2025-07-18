@@ -13,6 +13,8 @@ const city_routes_1 = __importDefault(require("./routes/city.routes"));
 const service_routes_1 = __importDefault(require("./routes/service.routes"));
 const review_routes_1 = __importDefault(require("./routes/review.routes"));
 const errorHandler_1 = require("./middlewares/errorHandler");
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_1 = __importDefault(require("./swagger"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -20,6 +22,7 @@ app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("API de Copabrisas funcionando 🚗");
 });
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.default));
 app.use("/customers", customer_routes_1.default);
 app.use("/vehicles", vehicle_routes_1.default);
 app.use("/api/bookings", booking_routes_1.default);

@@ -9,12 +9,12 @@ export const getReviewById = async (id: number) => {
 };
 
 export const createReview = async (data: { content: string; rating: number; customerId: number }) => {
-  return await prisma.review.create({ data });
+  return await prisma.review.create({ data, include: { customer: true } });
 };
 
 export const deleteReview = async (id: number) => {
-  return await prisma.review.delete({ where: { id } });
+  return await prisma.review.delete({ where: { id }, include: { customer: true } });
 };
 export const updateReview = async (id: number, data: { content?: string; rating?: number; customerId?: number }) => {
-  return await prisma.review.update({ where: { id }, data });
+  return await prisma.review.update({ where: { id }, data, include: { customer: true } });
 };

@@ -14,14 +14,14 @@ const getReviewById = async (id) => {
 };
 exports.getReviewById = getReviewById;
 const createReview = async (data) => {
-    return await client_1.default.review.create({ data });
+    return await client_1.default.review.create({ data, include: { customer: true } });
 };
 exports.createReview = createReview;
 const deleteReview = async (id) => {
-    return await client_1.default.review.delete({ where: { id } });
+    return await client_1.default.review.delete({ where: { id }, include: { customer: true } });
 };
 exports.deleteReview = deleteReview;
 const updateReview = async (id, data) => {
-    return await client_1.default.review.update({ where: { id }, data });
+    return await client_1.default.review.update({ where: { id }, data, include: { customer: true } });
 };
 exports.updateReview = updateReview;
